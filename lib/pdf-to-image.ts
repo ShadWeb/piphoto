@@ -13,6 +13,11 @@ export interface PDFPageImage {
   height: number;
 }
 
+export interface ConversionRange {
+  start: number;
+  end: number;
+}
+
 export class PDFToImageConverter {
   private static pdfjsLib: any = null;
 
@@ -25,24 +30,17 @@ export class PDFToImageConverter {
       return this.pdfjsLib;
     }
 
-    // داینامیک ایمپورت PDF.js
     const pdfjsLib = await import("pdfjs-dist");
 
-    // راه حل ۱: استفاده از فایل‌های .mjs
     try {
-      // ایمپورت فایل worker با پسوند .mjs
       const pdfjsWorker = await import("pdfjs-dist/build/pdf.worker.min.mjs");
-
-      // ایجاد Blob URL برای worker
       const workerBlob = new Blob([pdfjsWorker.default], {
         type: "application/javascript",
       });
       pdfjsLib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(workerBlob);
     } catch (error) {
       console.warn("Failed to load worker from local file, using CDN fallback");
-
-      // راه حل ۲: استفاده از CDN
-      const version = "3.11.174"; // نسخه متناسب با pdfjs-dist نصب شده
+      const version = "3.11.174";
       pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.js`;
     }
 
@@ -50,20 +48,39 @@ export class PDFToImageConverter {
     return pdfjsLib;
   }
 
+  static async getPDFInfo(pdfFile: File): Promise<{ totalPages: number }> {
+    const pdfjsLib = await this.loadPDFJS();
+    const arrayBuffer = await pdfFile.arrayBuffer();
+    const pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    const totalPages = pdfDoc.numPages;
+    await pdfDoc.destroy();
+    return { totalPages };
+  }
+
   static async convertPDFToImages(
     pdfFile: File,
-    options: PDFToImageOptions = {}
+    options: PDFToImageOptions = {},
+    range?: ConversionRange
   ): Promise<PDFPageImage[]> {
     const { scale = 2.0, quality = 1.0, format = "image/png" } = options;
 
     const pdfjsLib = await this.loadPDFJS();
-
     const arrayBuffer = await pdfFile.arrayBuffer();
     const pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
 
     const images: PDFPageImage[] = [];
 
-    for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+    // تعیین محدوده صفحات برای تبدیل
+    const startPage = range?.start || 1;
+    const endPage = range?.end || pdfDoc.numPages;
+
+    // اعتبارسنجی محدوده
+    if (startPage < 1 || endPage > pdfDoc.numPages || startPage > endPage) {
+      await pdfDoc.destroy();
+      throw new Error("Invalid page range");
+    }
+
+    for (let pageNum = startPage; pageNum <= endPage; pageNum++) {
       const page = await pdfDoc.getPage(pageNum);
       const viewport = page.getViewport({ scale });
 
@@ -77,7 +94,6 @@ export class PDFToImageConverter {
       canvas.width = viewport.width;
       canvas.height = viewport.height;
 
-      // رندر صفحه - استفاده از تایپ صحیح
       const renderParams = {
         canvasContext: context,
         viewport: viewport,
@@ -85,7 +101,6 @@ export class PDFToImageConverter {
 
       await page.render(renderParams).promise;
 
-      // تبدیل به blob
       const blob = await new Promise<Blob>((resolve) => {
         canvas.toBlob(
           (blob) => {
@@ -116,8 +131,11 @@ export class PDFToImageConverter {
     pageNumber: number = 1,
     options: PDFToImageOptions = {}
   ): Promise<PDFPageImage> {
-    const images = await this.convertPDFToImages(pdfFile, options);
-    const image = images.find((img) => img.pageNumber === pageNumber);
+    const images = await this.convertPDFToImages(pdfFile, options, {
+      start: pageNumber,
+      end: pageNumber,
+    });
+    const image = images[0];
 
     if (!image) {
       throw new Error(`Page ${pageNumber} not found`);
@@ -147,6 +165,10 @@ export class PDFToImageConverter {
         );
       }, index * 100);
     });
+  }
+
+  static cleanup() {
+    // پاکسازی منابع اگر لازم باشد
   }
 }
 
