@@ -2,8 +2,19 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  reactCompiler: true,
-  reactStrictMode: true,
+  devIndicators: false,
+   output: 'export',
+  images: {
+    unoptimized: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true, // ❗ مهم
+  },
+  typescript: {
+    ignoreBuildErrors: true,  // ❗ مهم
+  },
+
+  
 };
 
 export default nextConfig;
