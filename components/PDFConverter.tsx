@@ -379,6 +379,7 @@
 // export default PDFConverter;
 import { useState, useRef } from "react";
 import usePDFToImage from "@/hooks/usePDFToImage";
+import Image from "next/image";
 
 const PDFConverter = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -449,7 +450,7 @@ const PDFConverter = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark py-4 sm:py-8 px-3 sm:px-4">
+    <div className=" px-3 sm:px-4">
       <div className="max-w-6xl mx-auto">
         {/* Hero Section */}
         <section className="flex flex-col items-center text-center gap-6 sm:gap-8 mb-8 sm:mb-12">
@@ -477,11 +478,19 @@ const PDFConverter = () => {
                 onClick={handleUploadClick}
               >
                 <div className="flex flex-col items-center gap-2">
-                  <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary/10 text-primary mb-2">
-                    <span className="material-symbols-outlined text-2xl sm:text-3xl">
-                      upload
-                    </span>
+                  <div
+                    className="flex items-center justify-center rounded-full bg-primary/10 text-primary 
+  w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28 mb-2"
+                  >
+                    <Image
+                      src="/images/Frame121515.png"
+                      alt="icon"
+                      width={200}
+                      height={200}
+                      className=" object-contain"
+                    />
                   </div>
+
                   <p className="text-text-light dark:text-text-dark text-base sm:text-lg font-bold leading-tight tracking-[-0.015em] max-w-[480px] text-center">
                     {isDragging
                       ? "فایل را اینجا رها کنید"
@@ -605,10 +614,12 @@ const PDFConverter = () => {
               <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 <button
                   onClick={handleDownloadAll}
-                  className="flex items-center justify-center gap-2 w-full sm:w-auto min-w-[84px] cursor-pointer overflow-hidden rounded-xl h-10 sm:h-12 px-4 sm:px-6 bg-primary text-white text-sm sm:text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors order-2 sm:order-1"
+                  className="flex items-center bg-green-500 justify-center gap-2 w-full sm:w-auto min-w-[84px] cursor-pointer overflow-hidden rounded-xl h-10 sm:h-12 px-4 sm:px-6  text-white text-sm sm:text-base font-bold leading-normal tracking-[0.015em] hover:bg-green-700 transition-colors order-2 sm:order-1"
                 >
                   <span className="material-symbols-outlined">folder_zip</span>
-                  <span className="truncate">دانلود همه ({images.length})</span>
+                  <span className="truncate ">
+                    دانلود همه ({images.length})
+                  </span>
                 </button>
 
                 <button

@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 export default function Layout({ children }: any) {
   return (
-    <>
+    <div className="bg-background-light dark:bg-background-dark ">
       <Head>
         <title>PDF به عکس - تبدیل سریع و آسان</title>
         <meta
@@ -31,6 +31,6 @@ export default function Layout({ children }: any) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="w-full mt-auto py-6 border-t border-border-light dark:border-border-dark">
-      <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center text-center gap-4">
+      <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center bg-white text-center p-4 rounded gap-4">
         <p className="text-sm text-text-light/70 dark:text-text-dark/70">
           © ۲۰۲۴ PDF به عکس. تمام حقوق محفوظ است.
         </p>
