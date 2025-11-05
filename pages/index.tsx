@@ -19,9 +19,35 @@ const geistMono = Geist_Mono({
 export default function Home() {
   return (
     <Layout>
-      <PDFConverter />
-      <FeaturesSection />
-      <HowItWorks />
+      {/* تصویر پس‌زمینه یا بنر */}
+      <div className="absolute w-full top-0 min-h-[780px] mb-2 left-0 right-0 overflow-hidden">
+        {/* <img
+          src="/images/foxpiphotostanding.png"
+          alt="foxpiphoto"
+          className="absolute bottom-0 w-150 h-150 right-14 z-10"
+        /> */}
+        <Image
+          src="/images/Gemini_Generated_Image_bisgabbisgabbisg 2.png"
+          alt="Background"
+          fill
+          className="object-cover object-center"
+        />
+      </div>
+
+      {/* سکشن‌های صفحه */}
+      <section className="relative  z-10">
+        <PDFConverter />
+        <div className="md:hidden -mt-30">
+          <img
+            src="/images/foxpiphotositting.png"
+            alt="foxpiphoto"
+            className=""
+          />
+        </div>
+        <FeaturesSection />
+        <HowItWorks />
+      </section>
+
       <BackToTopButton />
     </Layout>
   );

@@ -1,27 +1,28 @@
 export default function FeaturesSection() {
   const features = [
     {
-      icon: "bolt",
-      title: "سریع و کارآمد",
-      description: "فایل‌های شما در چند ثانیه پردازش و آماده‌ی دانلود می‌شوند.",
+      images: "Frame 121518.png",
+      title: "تبدیل پی دی اف به عکس با کیفیت آنلاین",
+      description:
+        "تبدیل پی دی اف به عکس با کیفیت آنلاین، به‌سادگی و در چند ثانیه! همین حالا عکس‌ها و فایل‌های خودت رو سریع به PDF یا برعکس تبدیل کن.",
     },
     {
-      icon: "verified",
-      title: "کیفیت بالا",
+      images: "Frame 121517.png",
+      title: "تبدیل PDF به عکس رایگان",
       description:
-        "تصاویر خروجی با بالاترین کیفیت ممکن و بدون افت وضوح ایجاد می‌شوند.",
+        "شما می‌توانید به راحتی تبدیل PDF به عکس رایگان انجام دهید. فقط فایل PDF خود را آپلود کنید و در چند ثانیه تصاویر با کیفیت بالا و آماده استفاده دریافت کنید.",
     },
     {
-      icon: "touch_app",
-      title: "استفاده آسان",
+      images: "Frame 121516.png",
+      title: "برنامه تبدیل پی دی اف به jpeg , png",
       description:
-        "تنها با چند کلیک ساده، فایل خود را آپلود و تصاویر را دریافت کنید.",
+        "با برنامه تبدیل پی‌دی‌اف به JPEG و PNG، فایل‌های خود را سریع، آسان و با کیفیت به تصاویر تبدیل کنید،  بدون نصب نرم‌افزار و تنها در چند ثانیه!",
     },
   ];
 
   return (
-    <section className="flex flex-col items-center gap-8">
-      <h2 className="text-text-light dark:text-text-dark text-2xl md:text-3xl font-bold leading-tight tracking-[-0.015em]">
+    <section className="flex flex-col items-center gap-8 mt-10 z-10">
+      <h2 className="md:text-gray-200 text-black dark:text-text-dark text-2xl md:text-3xl font-bold leading-tight tracking-[-0.015em]">
         چرا ما را انتخاب کنید؟
       </h2>
 
@@ -33,7 +34,7 @@ export default function FeaturesSection() {
           >
             <div className="p-3 rounded-full bg-primary/20 text-primary">
               <span className="material-symbols-outlined text-4xl">
-                {feature.icon}
+                <img src={`images/${feature.images}`} alt={feature.title} />
               </span>
             </div>
             <h3 className="text-lg font-bold">{feature.title}</h3>

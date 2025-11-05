@@ -18,7 +18,7 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="flex flex-col items-center gap-8">
+    <section className="flex flex-col items-center mt-8 gap-8">
       <h2 className="text-text-light dark:text-text-dark text-2xl md:text-3xl font-bold leading-tight tracking-[-0.015em]">
         روند کار چگونه است؟
       </h2>

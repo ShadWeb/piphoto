@@ -9,7 +9,7 @@ export default function Layout({ children }: any) {
         <title>PDF به عکس - تبدیل سریع و آسان</title>
         <meta
           name="description"
-          content="سرویس رایگان و امن ما فایل های PDF شما را به تصاویر با کیفیت بالا تبدیل می کند"
+          content="تبدیل پی دی اف به عکس با کیفیت و آنلاین رایگان بدون نرم افزار در ویندوز و یا گوشی اندروید امکان پذیر است. برنامه تبدیل PDF به عکس به صورت انلاین و با کیفیت بالا "
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link
@@ -17,13 +17,14 @@ export default function Layout({ children }: any) {
           rel="stylesheet"
         />
       </Head>
-
       <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
         <div className="layout-container flex h-full grow flex-col">
           <div className="flex flex-1 justify-center py-5 sm:px-10 lg:px-40">
             <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-              <TopNavBar />
-              <main className="flex flex-col gap-16 md:gap-24 py-10 md:py-20 px-4">
+              <div className="relative">
+                <TopNavBar />
+              </div>
+              <main className="flex flex-col gap-16 md:gap-24  px-4">
                 {children}
               </main>
               <Footer />
