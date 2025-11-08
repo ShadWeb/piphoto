@@ -1186,7 +1186,7 @@ const PDFConverter = () => {
                   >
                     <Image
                       src="/images/Frame121515.png"
-                      alt="icon"
+                      alt="تبدیل پی دی اف به عکس"
                       width={120}
                       height={120}
                       className="object-contain"

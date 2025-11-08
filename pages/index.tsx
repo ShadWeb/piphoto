@@ -28,7 +28,7 @@ export default function Home() {
         /> */}
         <Image
           src="/images/Gemini_Generated_Image_bisgabbisgabbisg 2.png"
-          alt="Background"
+          alt="تبدیل پی دی اف به عکس"
           fill
           className="object-cover object-center"
         />
@@ -40,7 +40,7 @@ export default function Home() {
         <div className="md:hidden -mt-30">
           <img
             src="/images/foxpiphotositting.png"
-            alt="foxpiphoto"
+            alt="تبدیل پی دی اف به عکس"
             className=""
           />
         </div>
