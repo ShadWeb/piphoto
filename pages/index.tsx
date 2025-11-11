@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import HowItWorks from "../components/HowItWorks";
 import FeaturesSection from "@/components/FeaturesSection";
 import BackToTopButton from "@/components/BackToTopButton/BackToTopButton";
+import VideoIntroSection from "@/components/VideoIntroSection";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +47,7 @@ export default function Home() {
         </div>
         <FeaturesSection />
         <HowItWorks />
+        <VideoIntroSection />
       </section>
 
       <BackToTopButton />
